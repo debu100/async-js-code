@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Promise.all</title>
+  </head>
+  <body>
+    <script>
+      const p1 = new Promise((res, rej) => {
+        setTimeout(() => {
+          console.log("First Promise");
+          res(10);
+        }, 1000);
+      });
+
+      const p2 = new Promise((res, rej) => {
+        setTimeout(() => {
+          console.log("Second Promise");
+          res(20);
+        }, 2000);
+      });
+
+      const p3 = new Promise((res, rej) => {
+        setTimeout(() => {
+          console.log("Third Promise");
+          res(30);
+        }, 3000);
+      });
+
+      Promise.all([p1, p2, p3])
+        .then((mssg) => {
+          console.log(mssg); //? mssg is an array we get those form resolve()
+          const total = mssg.reduce((p, c) => {
+            return p + c;
+          }, 0);
+          console.log(total);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    </script>
+  </body>
+</html>
